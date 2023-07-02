@@ -26,7 +26,7 @@ except ImportError:
 
 class Ui_Dialog(object):
 
-    def githubfunc(self): #logoya basınca github reposuna yonlendir
+    def githubfunc(self): 
         webbrowser.open('https://github.com/jackalkarlos/BugBazaar')
 
     def cvesearch_funcbutton(self):
@@ -37,9 +37,7 @@ class Ui_Dialog(object):
                 response = requests.get(url)
         except:
                 print("Cant get data. Check your connection.")
-        #alınan ham http datasını kolay kullanım için jsona dönüştürülmesi
         json_data = json.loads(response.text)
-        #olan verinin bulunmaması halinde kodun çökmemesi için try except döngüleri.
         self.Search_CVE_ID.clear()
         self.Search_CVE_ID.insertPlainText(cvesearch)
         try:
@@ -72,15 +70,13 @@ class Ui_Dialog(object):
                 self.Search_PublishTime.insertPlainText("Data Not Found")
 
     def mostknowncves(self):
-            #print("this function working, so dont worry bro.") lutfen bu satiri silelim arkdslr...
             url = 'https://plasticuproject.pythonanywhere.com/nvd-api/v1/recent'
             r = requests.get(url)
-            text_satir = r.text.split(' ')  # Çıktıyı satırlara böler
+            text_satir = r.text.split(' ')  
             eslesme = []
             for match in text_satir:
                     if "CVE-" in match:
-                            eslesme.append(match)  # İçinde CVE olan elemanları "eslesme" listesine ekle
-            # "eslesme" içerisindeki gereksiz harflerin filtrelenmesini sağlar.
+                            eslesme.append(match)  
             for dongu1, filter1 in enumerate(eslesme):
                     eslesme[dongu1] = filter1.replace('"', "")
             for dongu2, filter2 in enumerate(eslesme):
@@ -101,18 +97,14 @@ class Ui_Dialog(object):
                     eslesme[dongu9] = filter9.replace(",", "")
             global cvecodes
             cvecodes = []
-            # http ve https linklerini sil, ayrıca boş çıktıları da sil ve outputa ekle
             for i in eslesme:
                     result = re.sub(r'http\S+', '', i)
                     if len(result) != 0:
                             cvecodes.append(result)
             self.UpToDate_List.clear()
-            #self.UpToDate_List.addItem(cvecodes)
 
             for i in cvecodes:
                     self.UpToDate_List.addItem(i)
-            #for linenumber, cvelist in zip(range(50), cvecodes): bro who did that:D
-            #        self.UpToDate_list.insertItem(linenumber + ", " + str(cvelist))
             self.UpToDate_List.clicked.connect(self.clicked)
     def clicked(self, qmodelindex):
             global item
@@ -159,7 +151,6 @@ class Ui_Dialog(object):
 
     def cvespreading(self):
         cvesearch = self.CVESpread_SearchBar.toPlainText()
-        #bro who did that *-*
         print("Establishing a Connection, Please Wait...")
         url = str(f"https://cveawg.mitre.org/api/cve/{cvesearch}")
         font2 = QtGui.QFont()
@@ -182,11 +173,6 @@ class Ui_Dialog(object):
         except:
                 self.CVESpread_AffectedThings.clear()
                 self.CVESpread_AffectedThings.insertPlainText("Data Not Found")
-#Ben kaldım kardeş, ben kaldım... -Görkem Dolcek
-#Kim bu yerden bitme karı? Ne anamız kaldı, ne avradımız -Azat Dolunay
-#Yaralarım var, ama düşmedim ensesinden -Mehmet Demir
-#Kod espri gibidir, açıklamak zorundaysan kötüdür -Talha Çaylı
-
 
     def setupUi(self, Dialog):
         #gui ayarları burdan başlıyor..
@@ -217,20 +203,16 @@ class Ui_Dialog(object):
         font.setPointSize(15)
         self.tabWidget.setFont(font)
         self.tabWidget.setObjectName("tabWidget")
-        #tab_4 anasayfamiz burasi onun ayarlari
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
-        #tab4te arka plana fotograf koymak icin bir frame olusturduk onun ayarlari burda
         self.frame = QtWidgets.QFrame(self.tab_4)
         self.frame.setGeometry(QtCore.QRect(-10, -20, 900, 700))
-        #stylesheet ile ekledik framein ustune, sonra framenin cikma sirasini raise ile belirliyoruz
         self.frame.setStyleSheet("background-image: url(:/karlostanselamlar/Free-HD-Solid-Color-Wallpaper-Download.png);\n"
 "        background-repeat: no-repeat; \n"
 "        background-position: center;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        #Githuba yonlendirmek icin frame gibi gozuken bi buton ayarlamistik flat ile sadece gorunmez yapiyoruz stylesheet ile resim olmasini sagliyoruz
         self.GitHubButton = QtWidgets.QPushButton(self.tab_4)
         self.GitHubButton.setGeometry(QtCore.QRect(270, 40, 351, 271))
         self.GitHubButton.setStyleSheet("border-image: url(:/karlostanselamlar/ladybug.png);")
@@ -240,7 +222,6 @@ class Ui_Dialog(object):
         self.GitHubButton.setFlat(True)
         self.GitHubButton.setObjectName("GitHubButton")
         self.GitHubButton.clicked.connect(self.githubfunc)
-        #Authors kısmının yazdığı text browser
         self.textBrowser = QtWidgets.QTextBrowser(self.tab_4)
         self.textBrowser.setGeometry(QtCore.QRect(240, 330, 431, 181))
         self.textBrowser.setStyleSheet("background-color: transparent")
@@ -251,13 +232,11 @@ class Ui_Dialog(object):
         self.GitHubButton.raise_()
         self.textBrowser.raise_()
         self.tabWidget.addTab(self.tab_4, "")
-        #Cve Search Function kisminin sekmesi
         self.tab = QtWidgets.QWidget()
         font = QtGui.QFont()
         font.setFamily("Jokerman")
         self.tab.setFont(font)
         self.tab.setObjectName("tab")
-        #Cve Aratma Kısmı Search Bar Ayar Kısmı Burası
         self.CVESearch_SearchBar = QtWidgets.QPlainTextEdit(self.tab)
         self.CVESearch_SearchBar.setGeometry(QtCore.QRect(50, 21, 790, 50))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
@@ -273,15 +252,12 @@ class Ui_Dialog(object):
 "ScrollBarAlwaysOff")
         self.CVESearch_SearchBar.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.CVESearch_SearchBar.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #Search Button ayarlari burda
         self.CVESearch_SearchButton = QtWidgets.QPushButton(self.tab)
         self.CVESearch_SearchButton.setGeometry(QtCore.QRect(710, 25, 120, 41))
         font = QtGui.QFont()
         font.setFamily("Lucida Console")
         self.CVESearch_SearchButton.setFont(font)
-        self.CVESearch_SearchButton.clicked.connect(self.cvesearch_funcbutton) #Butona tiklandiginda cvesearch_funcbutton fonksiyonunu cagiriyo, kabakodda bu satirdan sonrasina
-        #fonksiyon ile devam edicez bittikten sonra 285.satırdan devam tarzinda olcak
-        #CVE ID arkasinda duran beyaz koseli frame
+        self.CVESearch_SearchButton.clicked.connect(self.cvesearch_funcbutton) 
         self.frame_4 = QtWidgets.QFrame(self.tab)
         self.frame_4.setGeometry(QtCore.QRect(50, 100, 210, 40))
         self.frame_4.setStyleSheet(" background-color: white;\n"
@@ -289,7 +265,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #CVE_ID yazısı -htmlden nefret ediyorum-
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.frame_4)
         self.textBrowser_2.setGeometry(QtCore.QRect(30, 7, 151, 21))
         self.textBrowser_2.setStyleSheet(" border-width:0px;\n"
@@ -297,7 +272,6 @@ class Ui_Dialog(object):
         self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_2.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
 
-        #Search CVE ID yani sonuclarda cveidin denk geldigi kismin arkasi
         self.frame_6 = QtWidgets.QFrame(self.tab)
         self.frame_6.setGeometry(QtCore.QRect(280, 100, 561, 41))
         self.frame_6.setStyleSheet(" background-color: white;\n"
@@ -305,7 +279,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Sonuclardan gelen cve id'in ayarlari
         self.Search_CVE_ID = QtWidgets.QTextBrowser(self.frame_6)
         self.Search_CVE_ID.setGeometry(QtCore.QRect(0, 0, 561, 41))
         self.Search_CVE_ID.setStyleSheet("border-width:0px;")
@@ -313,7 +286,6 @@ class Ui_Dialog(object):
         self.Search_CVE_ID.setFont(font2)
         self.Search_CVE_ID.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.Search_CVE_ID.setAlignment(QtCore.Qt.AlignCenter)
-        #Vulnerability Type yazisinin arkasi
         self.frame_17 = QtWidgets.QFrame(self.tab)
         self.frame_17.setGeometry(QtCore.QRect(50, 150, 211, 41))
         self.frame_17.setStyleSheet(" background-color: white;\n"
@@ -321,14 +293,12 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Vulnerability Type Yazısı
         self.textBrowser_5 = QtWidgets.QTextBrowser(self.frame_17)
         self.textBrowser_5.setGeometry(QtCore.QRect(30, 7, 151, 21))
         self.textBrowser_5.setStyleSheet(" border-width:0px;\n"
 "")
         self.textBrowser_5.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_5.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #Vulnerability Type değerinin arka planı
         self.frame_18 = QtWidgets.QFrame(self.tab)
         self.frame_18.setGeometry(QtCore.QRect(280, 150, 561, 41))
         self.frame_18.setStyleSheet(" background-color: white;\n"
@@ -336,7 +306,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Vulnerability Type değerinin olduğu alan
         self.Search_Vulnerability_Type = QtWidgets.QTextBrowser(self.frame_18)
         self.Search_Vulnerability_Type.setGeometry(QtCore.QRect(0, 0, 561, 41))
         self.Search_Vulnerability_Type.setStyleSheet(" border-width:0px;\n"
@@ -344,7 +313,6 @@ class Ui_Dialog(object):
         self.Search_Vulnerability_Type.setFont(font2)
         self.Search_Vulnerability_Type.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.Search_Vulnerability_Type.setAlignment(QtCore.Qt.AlignCenter)
-        #Search Cve Description değişkenin arkası
         self.frame_19 = QtWidgets.QFrame(self.tab)
         self.frame_19.setGeometry(QtCore.QRect(280, 200, 561, 181))
         self.frame_19.setStyleSheet(" background-color: white;\n"
@@ -352,7 +320,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Cve Açıklaması
         self.Search_CVE_Description = QtWidgets.QTextBrowser(self.frame_19)
         self.Search_CVE_Description.setGeometry(QtCore.QRect(0, 0, 561, 181))
         self.Search_CVE_Description.setStyleSheet(" border-width:0px;\n"
@@ -360,7 +327,6 @@ class Ui_Dialog(object):
         self.Search_CVE_Description.setFont(font2)
         self.Search_CVE_Description.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.Search_CVE_Description.setAlignment(QtCore.Qt.AlignCenter)
-        #CVE Description yazısının arkası
         self.frame_20 = QtWidgets.QFrame(self.tab)
         self.frame_20.setGeometry(QtCore.QRect(50, 200, 211, 181))
         self.frame_20.setStyleSheet(" background-color: white;\n"
@@ -368,14 +334,12 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Cve Description yazısı
         self.textBrowser_6 = QtWidgets.QTextBrowser(self.frame_20)
         self.textBrowser_6.setGeometry(QtCore.QRect(22, 75, 171, 21))
         self.textBrowser_6.setStyleSheet(" border-width:0px;\n"
 "")
         self.textBrowser_6.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_6.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #Affected Devices Yazısının arkası
         self.frame_21 = QtWidgets.QFrame(self.tab)
         self.frame_21.setGeometry(QtCore.QRect(50, 390, 211, 101))
         self.frame_21.setStyleSheet(" background-color: white;\n"
@@ -383,14 +347,12 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Affected Devices Yazısı
         self.textBrowser_7 = QtWidgets.QTextBrowser(self.frame_21)
         self.textBrowser_7.setGeometry(QtCore.QRect(30, 40, 151, 21))
         self.textBrowser_7.setStyleSheet(" border-width:0px;\n"
 "")
         self.textBrowser_7.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_7.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #Etkilenen Cihazlar Verisinin arkası
         self.frame_22 = QtWidgets.QFrame(self.tab)
         self.frame_22.setGeometry(QtCore.QRect(280, 390, 561, 101))
         self.frame_22.setStyleSheet(" background-color: white;\n"
@@ -398,7 +360,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Etkilenen Cihazlar Verisinin olduğu kısım
         self.Search_CVEAffectedThings = QtWidgets.QTextBrowser(self.frame_22)
         self.Search_CVEAffectedThings.setGeometry(QtCore.QRect(0, 0, 561, 101))
         self.Search_CVEAffectedThings.setStyleSheet(" border-width:0px;\n"
@@ -406,13 +367,11 @@ class Ui_Dialog(object):
         self.Search_CVEAffectedThings.setFont(font2)
         self.Search_CVEAffectedThings.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.Search_CVEAffectedThings.setAlignment(QtCore.Qt.AlignCenter)
-        #Yayınlanma Zamanı Kkısmının Ayarları
         self.Search_PublishTime = QtWidgets.QTextBrowser(self.tab)
         self.Search_PublishTime.setGeometry(QtCore.QRect(530, 510, 311, 41))
         self.Search_PublishTime.setFont(font7)
         self.Search_PublishTime.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.Search_PublishTime.setAlignment(QtCore.Qt.AlignCenter)
-        #Arkaplan resmi
         self.frame_3 = QtWidgets.QFrame(self.tab)
         self.frame_3.setGeometry(QtCore.QRect(-20, -10, 951, 641))
         font = QtGui.QFont()
@@ -431,26 +390,22 @@ class Ui_Dialog(object):
         self.frame_21.raise_()
         self.frame_22.raise_()
         self.Search_PublishTime.raise_()
-        #List Of Up-To-Date sekmesi
         self.tabWidget.addTab(self.tab, "")
         self.tab_3 = QtWidgets.QWidget()
-        #Cvelerin olduğu liste
         self.UpToDate_List = QtWidgets.QListWidget(self.tab_3)
         self.UpToDate_List.setGeometry(QtCore.QRect(635, 69, 230, 491))
         self.UpToDate_Query = QtWidgets.QPushButton(self.tab_3)
         self.UpToDate_Query.setGeometry(QtCore.QRect(635, 10, 230, 50))
         font = QtGui.QFont()
         font.setFamily("Lucida Console")
-        #Query cveyi sorgulama butonu
         self.UpToDate_Query.setFont(font)
-        self.UpToDate_Query.clicked.connect(self.clicked2) #Tıklandıgında clicked2 fonksiyonunu cagirioyr dikkat burda
+        self.UpToDate_Query.clicked.connect(self.clicked2) 
         self.UpToDate_DBQuery = QtWidgets.QPushButton(self.tab_3)
         self.UpToDate_DBQuery.setGeometry(QtCore.QRect(20, 10, 341, 51))
         font = QtGui.QFont()
         font.setFamily("Lucida Console")
         self.UpToDate_DBQuery.setFont(font)
-        self.UpToDate_DBQuery.clicked.connect(self.mostknowncves) #Fonksiyon cagiriyor butona tikladiginda
-        #CVE_ID yazısının arka planı
+        self.UpToDate_DBQuery.clicked.connect(self.mostknowncves)
         self.frame_7 = QtWidgets.QFrame(self.tab_3)
         self.frame_7.setGeometry(QtCore.QRect(20, 80, 211, 41))
         self.frame_7.setStyleSheet(" background-color: white;\n"
@@ -458,14 +413,12 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #CVE_ID yazısı
         self.textBrowser_3 = QtWidgets.QTextBrowser(self.frame_7)
         self.textBrowser_3.setGeometry(QtCore.QRect(30, 10, 151, 21))
         self.textBrowser_3.setStyleSheet(" border-width:0px;\n"
 "")
         self.textBrowser_3.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_3.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #CVE ID Değerinin arka planı
         self.frame_8 = QtWidgets.QFrame(self.tab_3)
         self.frame_8.setGeometry(QtCore.QRect(250, 80, 371, 41))
         self.frame_8.setStyleSheet(" background-color: white;\n"
@@ -473,7 +426,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #CVE ID değeri
         self.UpToDate_CVEID = QtWidgets.QTextBrowser(self.frame_8)
         self.UpToDate_CVEID.setGeometry(QtCore.QRect(0, 0, 371, 41))
         self.UpToDate_CVEID.setStyleSheet(" border-width:0px;\n"
@@ -481,7 +433,6 @@ class Ui_Dialog(object):
         self.UpToDate_CVEID.setFont(font2)
         self.UpToDate_CVEID.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.UpToDate_CVEID.setAlignment(QtCore.Qt.AlignCenter)
-        #Vulnerability Type yazısının arka planı
         self.frame_23 = QtWidgets.QFrame(self.tab_3)
         self.frame_23.setGeometry(QtCore.QRect(20, 140, 211, 41))
         self.frame_23.setStyleSheet(" background-color: white;\n"
@@ -489,14 +440,12 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Vulnerability Type yazısı
         self.textBrowser_8 = QtWidgets.QTextBrowser(self.frame_23)
         self.textBrowser_8.setGeometry(QtCore.QRect(30, 10, 151, 21))
         self.textBrowser_8.setStyleSheet(" border-width:0px;\n"
 "")
         self.textBrowser_8.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_8.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #Vulnerability Type Değerinin Arkaplanı
         self.frame_24 = QtWidgets.QFrame(self.tab_3)
         self.frame_24.setGeometry(QtCore.QRect(250, 140, 371, 41))
         self.frame_24.setStyleSheet(" background-color: white;\n"
@@ -504,7 +453,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Vulnerability Type Değeri
         self.UpToDate_CVEType = QtWidgets.QTextBrowser(self.frame_24)
         self.UpToDate_CVEType.setGeometry(QtCore.QRect(0, 0, 371, 41))
         self.UpToDate_CVEType.setStyleSheet(" border-width:0px;\n"
@@ -512,7 +460,6 @@ class Ui_Dialog(object):
         self.UpToDate_CVEType.setFont(font7)
         self.UpToDate_CVEType.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.UpToDate_CVEType.setAlignment(QtCore.Qt.AlignCenter)
-        #Cve Description yazısının arka planı
         self.frame_25 = QtWidgets.QFrame(self.tab_3)
         self.frame_25.setGeometry(QtCore.QRect(20, 200, 211, 181))
         self.frame_25.setStyleSheet(" background-color: white;\n"
@@ -520,14 +467,12 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Cve Description yazısı
         self.textBrowser_9 = QtWidgets.QTextBrowser(self.frame_25)
         self.textBrowser_9.setGeometry(QtCore.QRect(20, 70, 171, 21))
         self.textBrowser_9.setStyleSheet(" border-width:0px;\n"
 "")
         self.textBrowser_9.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_9.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #Cve Description Değerinin arka planı
         self.frame_26 = QtWidgets.QFrame(self.tab_3)
         self.frame_26.setGeometry(QtCore.QRect(250, 200, 371, 181))
         self.frame_26.setStyleSheet(" background-color: white;\n"
@@ -535,7 +480,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Cve Description Değeri
         self.UpToDate_CVEDescription = QtWidgets.QTextBrowser(self.frame_26)
         self.UpToDate_CVEDescription.setGeometry(QtCore.QRect(0, 0, 371, 181))
         self.UpToDate_CVEDescription.setStyleSheet(" border-width:0px;\n"
@@ -543,7 +487,6 @@ class Ui_Dialog(object):
         self.UpToDate_CVEDescription.setFont(font7)
         self.UpToDate_CVEDescription.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.UpToDate_CVEDescription.setAlignment(QtCore.Qt.AlignCenter)
-        #Affected Devices yazısının arkaplanı
         self.frame_27 = QtWidgets.QFrame(self.tab_3)
         self.frame_27.setGeometry(QtCore.QRect(20, 400, 211, 101))
         self.frame_27.setStyleSheet(" background-color: white;\n"
@@ -551,14 +494,12 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Affected Devices yazısı
         self.textBrowser_10 = QtWidgets.QTextBrowser(self.frame_27)
         self.textBrowser_10.setGeometry(QtCore.QRect(30, 40, 151, 21))
         self.textBrowser_10.setStyleSheet(" border-width:0px;\n"
 "")
         self.textBrowser_10.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_10.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #Affected Devices değerinin arkaplanı
         self.frame_28 = QtWidgets.QFrame(self.tab_3)
         self.frame_28.setGeometry(QtCore.QRect(250, 400, 371, 101))
         self.frame_28.setStyleSheet(" background-color: white;\n"
@@ -566,7 +507,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Affected Devices değeri
         self.UpToDate_AffectedThings = QtWidgets.QTextBrowser(self.frame_28)
         self.UpToDate_AffectedThings.setGeometry(QtCore.QRect(0, 0, 371, 101))
         self.UpToDate_AffectedThings.setStyleSheet(" border-width:0px;\n"
@@ -574,20 +514,16 @@ class Ui_Dialog(object):
         self.UpToDate_AffectedThings.setFont(font2)
         self.UpToDate_AffectedThings.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.UpToDate_AffectedThings.setAlignment(QtCore.Qt.AlignCenter)
-        #Yayınlanma Tarihinin ayarları
         self.SHARETIME_2 = QtWidgets.QTextBrowser(self.tab_3)
         self.SHARETIME_2.setGeometry(QtCore.QRect(310, 520, 311, 41))
         self.SHARETIME_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.SHARETIME_2.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.SHARETIME_2.setFont(font7)
         self.SHARETIME_2.setAlignment(QtCore.Qt.AlignCenter)
-        #Arkaplan Resmi
         self.frame_9 = QtWidgets.QFrame(self.tab_3)
         self.frame_9.setGeometry(QtCore.QRect(-10, -20, 911, 611))
         self.frame_9.setStyleSheet("background-image: url(:/karlostanselamlar/Free-HD-Solid-Color-Wallpaper-Download.png);")
         self.frame_9.raise_()
-        #Guncel Veri Aciklarini Cektigimiz Sekmedeki Objelerin İleri
-        #Atilmasini sagliyor. Yoksa resim onlerine gecer.
         self.UpToDate_List.raise_()
         self.UpToDate_Query.raise_()
         self.UpToDate_DBQuery.raise_()
@@ -601,9 +537,7 @@ class Ui_Dialog(object):
         self.frame_28.raise_()
         self.SHARETIME_2.raise_()
         self.tabWidget.addTab(self.tab_3, "")
-        #Possible Spreading Tab
         self.tab_2 = QtWidgets.QWidget()
-        #Arama Barı Ayarları
         self.CVESpread_SearchBar = QtWidgets.QPlainTextEdit(self.tab_2)
         self.CVESpread_SearchBar.setGeometry(QtCore.QRect(50, 10, 791, 51))
         font = QtGui.QFont()
@@ -621,15 +555,12 @@ class Ui_Dialog(object):
         self.CVESpread_ShodanIOPicture = QtWidgets.QTextBrowser(self.tab_2)
         self.CVESpread_ShodanIOPicture.setGeometry(QtCore.QRect(50, 140, 800, 420))
         self.CVESpread_ShodanIOPicture.setStyleSheet("background-color: white; border-style: solid; border-width:1px; border-radius:10px; ScrollBarAlwaysOff")
-       #Arama butonu ayarları
         self.CVESpread_SearchButton = QtWidgets.QPushButton(self.tab_2)
         self.CVESpread_SearchButton.setGeometry(QtCore.QRect(680, 15, 141, 41))
         font = QtGui.QFont()
         font.setFamily("Lucida Console")
         self.CVESpread_SearchButton.setFont(font)
         self.CVESpread_SearchButton.clicked.connect(self.cvespreading)
-        #Resmin Olduğu Alan
-    #Affected Devices yazısının arkaplanı
         self.frame_29 = QtWidgets.QFrame(self.tab_2)
         self.frame_29.setGeometry(QtCore.QRect(50, 80, 211, 41))
         self.frame_29.setStyleSheet(" background-color: white;\n"
@@ -637,14 +568,12 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Affected Devices Yazısı
         self.textBrowser_11 = QtWidgets.QTextBrowser(self.frame_29)
         self.textBrowser_11.setGeometry(QtCore.QRect(30, 10, 151, 21))
         self.textBrowser_11.setStyleSheet(" border-width:0px;\n"
 "")
         self.textBrowser_11.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_11.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #Affected Devices Değerinin Arkaplanı
         self.frame_30 = QtWidgets.QFrame(self.tab_2)
         self.frame_30.setGeometry(QtCore.QRect(280, 80, 561, 41))
         self.frame_30.setStyleSheet(" background-color: white;\n"
@@ -652,7 +581,6 @@ class Ui_Dialog(object):
 " border-width:1px;\n"
 " border-radius:10px;\n"
 "ScrollBarAlwaysOff")
-        #Affected Devices Değeri
         self.CVESpread_AffectedThings = QtWidgets.QTextBrowser(self.frame_30)
         self.CVESpread_AffectedThings.setGeometry(QtCore.QRect(0, 0, 561, 41))
         self.CVESpread_AffectedThings.setStyleSheet(" border-width:0px;\n"
@@ -660,7 +588,6 @@ class Ui_Dialog(object):
         self.CVESpread_AffectedThings.setFont(font2)
         self.CVESpread_AffectedThings.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.CVESpread_AffectedThings.setAlignment(QtCore.Qt.AlignCenter)
-        #Arkaplanı
         self.frame_11 = QtWidgets.QFrame(self.tab_2)
         self.frame_11.setGeometry(QtCore.QRect(-50, -10, 931, 601))
         self.frame_11.setStyleSheet("background-image: url(:/karlostanselamlar/Free-HD-Solid-Color-Wallpaper-Download.png);")
@@ -672,8 +599,8 @@ class Ui_Dialog(object):
         self.frame_30.raise_()
         self.tabWidget.addTab(self.tab_2, "")
 
-        self.retranslateUi(Dialog) #retranslateUi fonksiyonunu Dialog ekranı için çalıştırıyor, translate html ile yaptığımız textlerin görünütlenmesini sağlıyor
-        self.tabWidget.setCurrentIndex(4) #Programın ana sayfadan açılmasını sağlıyor.
+        self.retranslateUi(Dialog)
+        self.tabWidget.setCurrentIndex(4) 
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):

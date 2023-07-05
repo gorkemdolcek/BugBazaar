@@ -63,6 +63,11 @@ python main.py
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+This program have a basic GUI interface.
+
+![image](https://user-images.githubusercontent.com/88983987/210010143-a4dbf984-e954-4691-b57e-4a80e9bd7ddb.png)
+
+
 <!-- AUTHORS -->
 
 ## 👥 Authors <a name="authors"></a>
@@ -78,8 +83,6 @@ python main.py
 👤 **Mehmet Demir**
 
 - GitHub: [@jackalkarlos]((https://github.com/jackalkarlos<br>))
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -131,8 +134,5 @@ _NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/
 
 
 
-This program have a basic GUI interface.
-
-![image](https://user-images.githubusercontent.com/88983987/210010143-a4dbf984-e954-4691-b57e-4a80e9bd7ddb.png)
 
 

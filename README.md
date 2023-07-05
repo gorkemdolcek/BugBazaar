@@ -72,8 +72,6 @@ This program have a basic GUI interface.
 
 ## 👥 Authors <a name="authors"></a>
 
-> Mention all of the collaborators of this project.
-
 👤 **Görkem Dolcek**
 
 - GitHub: [@gorkemdolcek](https://github.com/gorkemdolcek)
@@ -90,7 +88,6 @@ This program have a basic GUI interface.
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> Describe 1 - 3 features you will add to the project.
 
 - [ ] **[new_feature_1]**
 - [ ] **[new_feature_2]**

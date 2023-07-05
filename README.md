@@ -3,7 +3,7 @@
   <img src="ladybug.ico" alt="logo" width="140"  height="auto" />
   <br/>
 
-  <h3><b>BugBazaar README Template</b></h3>
+  <h3><b>BugBazaar</b></h3>
 
 </div>
 

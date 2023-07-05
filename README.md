@@ -99,9 +99,9 @@ python main.py
 - Twitter: [@mrdolcek](https://twitter.com/mrdolcek)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/gorkemdolcek)
 
-👤 **Author2**
+👤 **Mehmet Demir**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
+- GitHub: [@jackalkarlos]((https://github.com/jackalkarlos<br>))
 - Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
 
@@ -129,41 +129,6 @@ Feel free to check the [issues page](../../issues/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- SUPPORT -->
-
-## ⭐️ Show your support <a name="support"></a>
-
-> Write a message to encourage readers to support your project
-
-If you like this project...
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGEMENTS -->
-
-## 🙏 Acknowledgments <a name="acknowledgements"></a>
-
-> Give credit to everyone who inspired your codebase.
-
-I would like to thank...
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- FAQ (optional) -->
-
-## ❓ FAQ (OPTIONAL) <a name="faq"></a>
-
-> Add at least 2 questions new developers would ask when they decide to use your project.
-
-- **[Question_1]**
-
-  - [Answer_1]
-
-- **[Question_2]**
-
-  - [Answer_2]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 
@@ -189,31 +154,9 @@ _NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/
 
 
 
-# BugBazaar
 
-An application that finds current security vulnerabilities and lists them with a graphical interface. It also shows which countries a vulnerability could most affect. It was made as a project for Istanbul Gelişim University Programming Fundamentals course.
-
-## Installation
-
-Use the "python main.py" Bugbazaar will install all packages automatically
-
-```bash
-python main.py
-```
-
-## Usage
-```bash
-python main.py
-```
 This program have a basic GUI interface.
 
 ![image](https://user-images.githubusercontent.com/88983987/210010143-a4dbf984-e954-4691-b57e-4a80e9bd7ddb.png)
 
 
-## Authors
-
-https://github.com/gorkemdolcek<br>
-https://github.com/jackalkarlos<br>
-https://github.com/talhacyl<br>
-https://github.com/Butex-a11<br>
-https://github.com/dilarasenturk<br>

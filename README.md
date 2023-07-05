@@ -34,19 +34,6 @@
 
 > Describe the tech stack and include only the relevant sections that apply to your project.
 
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li><a href=""></a></li>
-  </ul>
-</details>
-
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="">s</a></li>
-  </ul>
-</details>
 
 <details>
 <summary>GUI</summary>

@@ -64,7 +64,7 @@ python main.py
 
 This program have a basic GUI interface.
 
-![image](https://products.groupdocs.app/viewer/app?lang=tr&file=227a2ee7-f391-4024-8b75-feb04e7e299c/BugBazaar%20CVE%20List%20Page%20View.png)
+![image]()
 
 
 <!-- AUTHORS -->

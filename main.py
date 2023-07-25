@@ -25,31 +25,31 @@ from bugbazaar import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):
-    def __init__(self): # Ana pencereyi oluşturur
+    def __init__(self): 
         super(MainWindow, self).__init__() #
 
         self.ui = Ui_MainWindow() 
         self.ui.setupUi(self) 
 
-        self.ui.icon_only_widget.hide() # Butonların sadece ikonlarını gösterir
-        self.ui.stackedWidget.setCurrentIndex(0) # StackedWidget'ın hangi sayfada başlayacağını belirler
-        self.ui.home_btn_2.setChecked(True) # Ana sayfanın seçili olmasını sağlar
+        self.ui.icon_only_widget.hide() 
+        self.ui.stackedWidget.setCurrentIndex(0) 
+        self.ui.home_btn_2.setChecked(True) 
 
-    def on_stackedWidget_currentChanged(self, index): # StackedWidget'ın hangi sayfada olduğunu belirler
-        btn_list = self.ui.icon_only_widget.findChildren(QPushButton) # Butonların listesini alır
+    def on_stackedWidget_currentChanged(self, index): 
+        btn_list = self.ui.icon_only_widget.findChildren(QPushButton) 
         self.ui.full_menu_widget.findChildren(QPushButton) 
         
         for btn in btn_list: 
             if index in [5, 6]:
-                btn.setAutoExclusive(False) # Butonların birbirini kapatmasını engeller
-                btn.setChecked(False) # Butonların seçili olmasını engeller
+                btn.setAutoExclusive(False) 
+                btn.setChecked(False) 
             else:
-                btn.setAutoExclusive(True) # Butonların birbirini kapatmasını engeller
+                btn.setAutoExclusive(True) 
 
       
-    ## Menü dağılımı
-    def on_home_btn_1_toggled(self): # Butonlar seçildiğinde stackedWidget'ın hangi sayfaya geçeceğini belirler
-        self.ui.stackedWidget.setCurrentIndex(0) # 0. sayfa ana sayfa
+   
+    def on_home_btn_1_toggled(self): 
+        self.ui.stackedWidget.setCurrentIndex(0) 
     
     def on_home_btn_2_toggled(self):
         self.ui.stackedWidget.setCurrentIndex(0)

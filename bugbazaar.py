@@ -13,21 +13,22 @@ class Ui_MainWindow(object):
     
 
 ####################################################################################################
-    def gd_githubfunc(self): # Authors Gtihub butonuna basınca github reposuna yonlendir           #
+    def gd_githubfunc(self):                                                                       #
         webbrowser.open('https://github.com/gorkemdolcek/')                                        #
                                                                                                    #
-    def gd_linkedinfunc(self): #Authors Linkedin butonuna basınca linkedin hesabına yonlendir      #
+    def gd_linkedinfunc(self):                                                                     #
         webbrowser.open('https://www.linkedin.com/in/gorkemdolcek/')                               #
                                                                                                    #
-    def gd_twitterfunc(self): #Authors Twitter butonuna basınca twitter hesabına yonlendir         #
+    def gd_twitterfunc(self):                                                                      #
         webbrowser.open('https://twitter.com/mrdolcek')                                            #
 ####################################################################################################        
 
+    def home_githubfunc(self):
+        webbrowser.open('https://github.com/gorkemdolcek/BugBazaar/')
 
 
 
-
-    def cvesearch_funcbutton(self): # CVE Search butonuna basınca cve arama fonksiyonunu çalıştırır
+    def cvesearch_funcbutton(self): 
         cvesearch= self.search_text.toPlainText()
         print("Establishing a Connection, Please Wait...")
         url=str(f"https://cveawg.mitre.org/api/cve/{cvesearch}")
@@ -67,16 +68,15 @@ class Ui_MainWindow(object):
                 self.date_response.clear()
                 self.date_response.insertPlainText("Data Not Found")
 
-    def mostknowncves(self): # CVE LİST BÖLÜMÜ İÇİN
-            #print("this function working, so dont worry bro.") lutfen bu satiri silelim arkdslr...
+    def mostknowncves(self):
             url = 'https://plasticuproject.pythonanywhere.com/nvd-api/v1/recent'
             r = requests.get(url)
-            text_satir = r.text.split(' ')  # Çıktıyı satırlara böler
+            text_satir = r.text.split(' ')  
             eslesme = []
             for match in text_satir:
                     if "CVE-" in match:
-                            eslesme.append(match)  # İçinde CVE olan elemanları "eslesme" listesine ekle
-            # "eslesme" içerisindeki gereksiz harflerin filtrelenmesini sağlar.
+                            eslesme.append(match)  
+            
             for dongu1, filter1 in enumerate(eslesme):
                     eslesme[dongu1] = filter1.replace('"', "")
             for dongu2, filter2 in enumerate(eslesme):
@@ -97,32 +97,29 @@ class Ui_MainWindow(object):
                     eslesme[dongu9] = filter9.replace(",", "")
             global cvecodes
             cvecodes = []
-            # http ve https linklerini sil, ayrıca boş çıktıları da sil ve outputa ekle
+            
             for i in eslesme:
                     result = re.sub(r'http\S+', '', i)
                     if len(result) != 0:
                             cvecodes.append(result)
             self.cveList_queryList.clear()
-            #self.UpToDate_List.addItem(cvecodes)
+            
 
             for i in cvecodes:
                     self.cveList_queryList.addItem(i)
-            #for linenumber, cvelist in zip(range(50), cvecodes): bro who did that:D
-            #        self.UpToDate_list.insertItem(linenumber + ", " + str(cvelist))
             self.cveList_queryList.clicked.connect(self.clicked)
 
-    def clicked(self, qmodelindex): # CVE LİST BÖLÜMÜ İÇİN
+    def clicked(self, qmodelindex): 
             global item
             item = self.cveList_queryList.currentItem()
 
-    def clicked2(self): # CVE LİST BÖLÜMÜ İÇİN
+    def clicked2(self): 
             url = str(f"https://cveawg.mitre.org/api/cve/{item.text()}")
             try:
                     response = requests.get(url)
             except:
                     print("Cant get data. Check your connection.")
             json_data = json.loads(response.text)
-            #print(json_data)
             self.cveList_cveID_response.clear()
             self.cveList_cveID_response.insertPlainText(item.text())
             try:
@@ -148,7 +145,7 @@ class Ui_MainWindow(object):
                     self.cveList_affdevices_response.insertPlainText("Affected Devices Data Not Found")
 
 
-    def cvespreading(self):  # CVE SPREADING BÖLÜMÜ İÇİN
+    def cvespreading(self):  
         cvesearch = self.spreading_search_input.toPlainText()
         #bro who did that *-*
         print("Establishing a Connection, Please Wait...")
@@ -461,6 +458,7 @@ class Ui_MainWindow(object):
         self.home_github_btn.setIcon(icon8)
         self.home_github_btn.setIconSize(QtCore.QSize(32, 32))
         self.home_github_btn.setObjectName("home_github_btn")
+        self.home_github_btn.clicked.connect(self.home_githubfunc)
         self.github_text = QtWidgets.QTextEdit(self.home_frame)
         self.github_text.setGeometry(QtCore.QRect(80, 320, 151, 91))
         font = QtGui.QFont()
@@ -598,7 +596,6 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.date_response_frame, 5, 1, 1, 1)
         self.stackedWidget.addWidget(self.page2)
 
-        #3.Sayfa Ayarları.
         self.page3 = QtWidgets.QWidget()
         self.page3.setObjectName("page3")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.page3)
@@ -793,7 +790,7 @@ class Ui_MainWindow(object):
         self.gridLayout_3.addWidget(self.cveList_checkcves, 1, 0, 1, 1)
         self.stackedWidget.addWidget(self.page3)
 
-        # 4. Sayfa Ayarları.
+
         self.page4 = QtWidgets.QWidget()
         self.page4.setObjectName("page4")
         self.gridLayout_4 = QtWidgets.QGridLayout(self.page4)
@@ -893,7 +890,7 @@ class Ui_MainWindow(object):
         self.spreading_affdevices_response_frame.raise_()
         self.CVESpread_ShodanIOPicture.raise_()
 
-        # 5. Sayfa Ayarları.
+
         self.page5 = QtWidgets.QWidget()
         self.page5.setObjectName("page5")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.page5)
@@ -1177,7 +1174,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
 
-        # Click İşlemleri. 
+
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(3)
         self.exit_btn_1.clicked.connect(MainWindow.close) # type: ignore

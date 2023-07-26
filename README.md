@@ -88,9 +88,9 @@ This program have a basic GUI interface.
 ## 🔭 Future Features <a name="future-features"></a>
 
 
-- [ ] **[new_feature_1]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
+- [ ] **[New GUI]**
+- [ ] **[New menu options]**
+- [ ] **[Optimization]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

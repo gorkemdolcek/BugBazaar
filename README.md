@@ -15,7 +15,6 @@
 - [💻 Getting Started](#getting-started)
   - [Install](#install)
   - [Usage](#usage)
-- [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
 - [📝 License](#license)
@@ -65,23 +64,6 @@ python main.py
 This program have a basic GUI interface.
 
 ![image]()
-
-
-<!-- AUTHORS -->
-
-## 👥 Authors <a name="authors"></a>
-
-👤 **Görkem Dolcek**
-
-- GitHub: [@gorkemdolcek](https://github.cocek)
-- Twitter: [@mrdolcek](https://twitter.com/mrdolcek)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/gorkemdolcek)
-
-👤 **Mehmet Demir**
-
-- GitHub: [@jackalkarlos]((https://github.com/jackalkarlos<br>))
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
 
